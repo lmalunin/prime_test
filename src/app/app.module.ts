@@ -7,11 +7,13 @@ import {IndexComponent} from './index/index.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { InnerFormComponent } from './index/inner-form/inner-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent
+    IndexComponent,
+    InnerFormComponent
   ],
   imports: [
     BrowserModule,

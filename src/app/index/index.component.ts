@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import moment, { Moment } from 'moment';
 import Diff = moment.unitOfTime.Diff;
 
@@ -70,8 +70,9 @@ export class IndexComponent implements OnInit {
 
     constructor(private readonly _formBuilder: FormBuilder,) {
         this.form = this._formBuilder.group({
-            beginDate: [],
-            endDate: []
+            beginDate: [null, Validators.required],
+            endDate: [null, Validators.required],
+            innerForm: []
         }, { validators: this._recordsRangeValidator })
     }
 
@@ -83,9 +84,19 @@ export class IndexComponent implements OnInit {
         return this.form.get('endDate') as FormControl;
     }
 
+    public get innerForm(): FormControl {
+        return this.form.get('innerForm') as FormControl;
+    }
+
     ngOnInit(): void {
         this.beginDate.statusChanges.subscribe(console.log);
         this.endDate.statusChanges.subscribe(console.log);
     }
 
+    submit() {
+        console.log(this.form.value);
+        console.log(this.form.errors);
+        console.log(this.form.status);
+        console.log('inner.form', this.innerForm.status);
+    }
 }

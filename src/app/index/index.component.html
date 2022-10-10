@@ -1,4 +1,5 @@
-<form [formGroup]="form">
+<form (ngSubmit)="submit()"
+      [formGroup]="form">
     <div class="grid">
         <div class="col-3">
             <label for="start">beginDate</label>
@@ -19,9 +20,13 @@
                         yearRange="{{calendarRanges.default.start}}:{{calendarRanges.default.end}}"></p-calendar>
         </div>
     </div>
+
+    <app-inner-form formControlName="innerForm"></app-inner-form>
+
+    <button type="submit">Submit</button>
 </form>
 
 <p>Form value: {{ form.value | json }}</p>
-<p>Form value: {{ form.status | json }}</p>
-<p>Form status: {{ form.errors | json }}</p>
+<p>Form status: {{ form.status | json }}</p>
+<p>Form errors: {{ form.errors | json }}</p>
 
