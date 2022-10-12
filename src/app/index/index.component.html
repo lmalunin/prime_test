@@ -1,6 +1,10 @@
 <form (ngSubmit)="submit()"
       [formGroup]="form">
     <div class="grid">
+        <div class="col-12">
+            <input formControlName="homeInput"
+                   pInputText>
+        </div>
         <div class="col-3">
             <label for="start">beginDate</label>
             <p-calendar [maxDate]="endDate.value"
@@ -20,13 +24,20 @@
                         yearRange="{{calendarRanges.default.start}}:{{calendarRanges.default.end}}"></p-calendar>
         </div>
     </div>
+    <div>Inner form</div>
+    <app-inner-form [financingList]="financingList"
+                    [radioList]="radioList"
+                    formControlName="innerForm"></app-inner-form>
 
-    <app-inner-form formControlName="innerForm"></app-inner-form>
-
-    <button type="submit">Submit</button>
+    <br>
+    <br>
+    <button
+            type="submit">Submit
+    </button>
 </form>
 
 <p>Form value: {{ form.value | json }}</p>
 <p>Form status: {{ form.status | json }}</p>
 <p>Form errors: {{ form.errors | json }}</p>
+<p>Form errors: {{ innerForm.errors | json }}</p>
 

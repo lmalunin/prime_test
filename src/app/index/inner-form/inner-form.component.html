@@ -1,6 +1,87 @@
 <form [formGroup]="formGroup">
-    <input formControlName="input1"
-           type="text">
-    <input formControlName="input2"
-           type="text">
+    <div class="grid">
+        <div class="col-3">
+            <input formControlName="input1"
+                   pInputText>
+        </div>
+        <div class="col-3">
+            <input formControlName="input2"
+                   pInputText>
+        </div>
+    </div>
+
+    <br>
+    <div style="display: flex;">
+        <div *ngFor="let radio of radioList;">
+            <input [id]="radio.id"
+                   [value]="radio"
+                   formControlName="radio"
+                   type="radio"/>
+            <label for="radio-{{radio.id}}">{{radio.name}}</label>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div>Financing</div>
+    <div style="display: flex">
+
+        <div formArrayName="financing"
+             style="display: flex">
+            <div [formGroupName]="0">
+                <div>{{financing.controls[0].value | json}}</div>
+                <br>
+                <div>{{financing.controls[0].value.title}}</div>
+                <input formControlName="quota"
+                       pInputText>
+                <br>
+                <br>
+                <p-slider formControlName="quota"></p-slider>
+            </div>
+            <div [formGroupName]="1">
+                <div>{{financing.controls[1].value | json}}</div>
+                <br>
+                <div>{{financing.controls[1].value.title}}</div>
+                <input formControlName="quota"
+                       pInputText>
+                <br>
+                <br>
+                <p-slider formControlName="quota"></p-slider>
+            </div>
+            <div [formGroupName]="2">
+                <div>{{financing.controls[2].value | json}}</div>
+                <br>
+                <div>{{financing.controls[2].value.title}}</div>
+                <input formControlName="quota"
+                       pInputText>
+                <br>
+                <br>
+                <p-slider formControlName="quota"></p-slider>
+            </div>
+            <div [formGroupName]="3">
+                <div>{{financing.controls[3].value | json}}</div>
+                <br>
+                <div>{{financing.controls[3].value.title}}</div>
+                <input formControlName="quota"
+                       pInputText>
+                <br>
+                <br>
+                <p-slider formControlName="quota"></p-slider>
+            </div>
+        </div>
+
+        <!--        <ng-container *ngFor="let control of financing.controls; let i = index;"-->
+        <!--                      formArrayName="financing">-->
+        <!--            <div [formGroupName]="i">-->
+        <!--                <div>{{control.value | json}}</div>-->
+        <!--                <br>-->
+        <!--                <div>{{control.value.title}}</div>-->
+        <!--                <input formControlName="quota"-->
+        <!--                       pInputText>-->
+        <!--                <br>-->
+        <!--                <br>-->
+        <!--                <p-slider formControlName="quota"></p-slider>-->
+        <!--            </div>-->
+        <!--        </ng-container>-->
+    </div>
+
 </form>
