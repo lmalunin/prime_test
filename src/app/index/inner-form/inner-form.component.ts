@@ -16,7 +16,7 @@ import {
 } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DictionaryFormModel } from '../../models/dictionaryForm.model';
-import { customValidateArrayGroup } from '../../utils/form.validate';
+import { quotaExceedValidateFormArray } from '../../utils/form.validate';
 
 
 @UntilDestroy()
@@ -53,7 +53,7 @@ export class InnerFormComponent implements OnInit, ControlValueAccessor, Validat
             financing: this._formBuilder.array([])
         });
 
-        this.financing.addValidators([customValidateArrayGroup(100, 'quota')]);
+        this.financing.addValidators([quotaExceedValidateFormArray(100, 'quota')]);
     }
 
     public get inpit1() {

@@ -16,7 +16,7 @@ export const markAsDirtyAndTouched = (control: AbstractControl): void => {
     control.markAsDirty({ onlySelf: true });
 };
 
-export function customValidateArrayGroup(maxValue: number, fieldName: string): ValidatorFn {
+export function quotaExceedValidateFormArray(maxValue: number, fieldName: string): ValidatorFn {
     return (formArray: AbstractControl): { [key: string]: any } | null => {
 
         const controlArray = formArray as FormArray;
