@@ -1,7 +1,7 @@
 <form (ngSubmit)="submit()"
       [formGroup]="form">
     <div class="grid">
-        <div class="col-12">
+        <div class="col-3">
             <input formControlName="homeInput"
                    pInputText>
         </div>
@@ -40,4 +40,7 @@
 <p>Form status: {{ form.status | json }}</p>
 <p>Form errors: {{ form.errors | json }}</p>
 <p>Form errors: {{ innerForm.errors | json }}</p>
+
+
+<app-tablenew1></app-tablenew1>
 

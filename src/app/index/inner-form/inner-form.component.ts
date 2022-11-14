@@ -81,6 +81,9 @@ export class InnerFormComponent implements OnInit, ControlValueAccessor, Validat
     };
 
     ngOnInit(): void {
+
+        this.radio.patchValue(this.radioList[1]);
+
         this.formGroup.valueChanges.pipe(
             untilDestroyed(this)
         ).subscribe(val => (
