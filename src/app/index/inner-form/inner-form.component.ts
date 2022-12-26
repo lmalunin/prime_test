@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {
     AbstractControl,
     ControlContainer,
@@ -45,23 +45,26 @@ export class InnerFormComponent implements OnInit, ControlValueAccessor, Validat
     @Input() radioList: any[] = [];
     @Input() financingList: any[] = [];
 
+    @ViewChild('tooltipRef') tooltipRef: ElementRef;
+
     constructor(private _formBuilder: FormBuilder) {
         this.formGroup = _formBuilder.group({
             input1: [null, Validators.required],
             input2: [null, Validators.required],
             radio: [],
-            financing: this._formBuilder.array([])
+            financing: this._formBuilder.array([]),
+            type: 'D'
         });
 
         this.financing.addValidators([quotaExceedValidateFormArray(100, 'quota')]);
     }
 
     public get inpit1() {
-        return this.formGroup.controls['inpit1'] as FormControl;
+        return this.formGroup.controls['input1'] as FormControl;
     }
 
     public get inpit2() {
-        return this.formGroup.controls['inpit2'] as FormControl;
+        return this.formGroup.controls['input2'] as FormControl;
     }
 
     public get radio() {
@@ -106,6 +109,10 @@ export class InnerFormComponent implements OnInit, ControlValueAccessor, Validat
             onlySelf: true,
             emitEvent: false
         }));
+
+        this.radio?.valueChanges.subscribe(value => {
+            console.log(value)
+        })
     }
 
     registerOnChange(fn: any): void {

@@ -7,6 +7,7 @@ import { CalendarModule } from "primeng/calendar";
 import { InputTextModule } from "primeng/inputtext";
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +33,8 @@ import { Tablenew1Component } from './tablenew1/tablenew1.component';
         AppRoutingModule,
         InputTextModule,
         SliderModule,
-        TableModule
+        TableModule,
+        TooltipModule
     ],
     providers: [ProductService],
     bootstrap: [AppComponent],

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from "@angular/forms";
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import moment, { Moment } from 'moment';
 import { markAllAsDirtyAndTouched } from '../utils/form.validate';
 import Diff = moment.unitOfTime.Diff;
@@ -59,6 +60,7 @@ export const CALENDAR_CONFIG_RANGE: ICalendarRanges = {
     },
 }
 
+@UntilDestroy()
 @Component({
     selector: 'app-index',
     templateUrl: './index.component.html',
@@ -120,17 +122,7 @@ export class IndexComponent implements OnInit {
             quota: 0,
         },
     ];
-
     private readonly _recordsRangeValidator: ValidatorFn = dateCompare('beginDate', 'endDate', { invalidRecordsDatesRange: true }, 1, 'year');
-
-    constructor(private readonly _formBuilder: FormBuilder,) {
-        this.form = this._formBuilder.group({
-            homeInput: ['a1', Validators.required],
-            beginDate: [null, Validators.required],
-            endDate: [null, Validators.required],
-            innerForm: []
-        }, { validators: this._recordsRangeValidator })
-    }
 
     public get homeInput(): FormControl {
         return this.form.get('homeInput') as FormControl;
@@ -148,6 +140,15 @@ export class IndexComponent implements OnInit {
         return this.form.get('innerForm') as FormControl;
     }
 
+    constructor(private readonly _formBuilder: FormBuilder,) {
+        this.form = this._formBuilder.group({
+            homeInput: ['a1', Validators.required],
+            beginDate: [null, Validators.required],
+            endDate: [null, Validators.required],
+            innerForm: []
+        }, { validators: this._recordsRangeValidator })
+    }
+
     ngOnInit(): void {
         // this.beginDate.statusChanges.subscribe(console.log);
         // this.endDate.statusChanges.subscribe(console.log);
@@ -157,6 +158,11 @@ export class IndexComponent implements OnInit {
         //this.financingList[1].quota = 10;
 
         //this.innerForm.patchValue({ radio: this.radioList[1], financing: this.financingList });
+        this.form.statusChanges.pipe(
+            untilDestroyed(this)
+        ).subscribe(value => {
+            console.log(value)
+        })
     }
 
     submit() {
